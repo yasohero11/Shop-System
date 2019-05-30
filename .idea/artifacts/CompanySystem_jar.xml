@@ -5,7 +5,7 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$USER_HOME$/Desktop/jfoenix-8.0.8.ja/META-INF/MANIFEST.MF" />
       </element>
-      <element id="module-output" name="CompanySystem" />
+      <element id="module-output" name="ShopSystem" />
     </root>
   </artifact>
 </component>
