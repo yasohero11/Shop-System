@@ -6,13 +6,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+import java.util.LinkedList;
 
+public class Main extends Application {
+    public static LinkedList<Product> products  = new LinkedList<>();
+    public static Order order = new Order();
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("FXML.fxml"));
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 1300, 730));
+        primaryStage.setScene(new Scene(root, 1300, 795));
         primaryStage.show();
     }
 

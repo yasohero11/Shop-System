@@ -6,9 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
-import javax.xml.soap.Node;
-import javax.xml.soap.Text;
+;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -19,64 +20,71 @@ public class Product {
     private String time;
     private Pane layout;
     private Label count;
-    private Label text;
     private int amount = 0;
     private JFXButton add;
     private JFXButton sub;
+    private Label text;
+    private boolean layoutExist =  false;
 
-    Product(String name , double price){
+    Product(String name , double price , VBox pane){
         Date d = new Date();
         SimpleDateFormat date = new SimpleDateFormat("MM/dd/y");
         this.date = date.format(d);
         SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss a");
         this.time = time.format(d);
-        layout = new Pane();
+        this.name = name;
         text = new Label(name);
+        layout = new Pane();
         count = new Label("0");
         add = new JFXButton("+");
         sub = new JFXButton("-");
         sub.setPrefWidth(30);
         add.setPrefWidth(30);
         layout.setPrefSize(523 , 25);
+        setLayout(text , 0 , 0);
         setLayout(add , 400 , 0);
-        setLayout(count ,  450 , 0);
+        setLayout(count ,  450 , 3);
         setLayout(sub , 480 , 0);
-        setLayout(text , 0 , 2);
-        layout.getChildren().addAll(text ,  add , count , sub);
+
+        layout.getChildren().addAll(text ,add , count , sub);
         layout.setStyle("-fx-background-color : white");
         add.setOnAction(e->{
             if(amount != 1000){
                 amount++;
                 count.setText(String.valueOf(amount));
+                Main.order.addOrder(getProductName() , getTotal());
             }
         });
         sub.setOnAction(e->{
             if(amount != 0){
                 amount--;
                 count.setText(String.valueOf(amount));
+                if(!layoutExist) {
+                    Main.order.addOrder(getProductName(), getTotal());
+                    layoutExist= true;
+                }
             }
         });
         this.name =  name;
         this.price = price;
     }
 
+    public String getTotal() {
+        return  String.valueOf(price * amount);
+    }
 
-    public void setLayout(Labeled button , double x , double y){
+    private void setLayout(Labeled button , double x , double y){
         button.setLayoutX(x);
         button.setLayoutY(y);
     }
+
     public Pane getLayout() {
         return layout;
-    }
-
-    public Label getText() {
-        return text;
     }
 
     public Label getCount() {
         return count;
     }
-
 
     public double getPrice() {
         return price;
@@ -85,9 +93,17 @@ public class Product {
     public String getProductName() {
         return name;
     }
+    public void setProductName(String newName){
+        name =  newName;
+        text.setText(name);
+        amount=0;
+        count.setText("0");
+    }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setPrice(double price) {
+        this.price = price;
+        amount=0;
+        count.setText("0");
     }
 
     public String getTime() {
