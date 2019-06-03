@@ -24,9 +24,10 @@ public class Product {
     private JFXButton add;
     private JFXButton sub;
     private Label text;
+    Label totalPrice;
     private boolean layoutExist =  false;
 
-    Product(String name , double price , VBox pane){
+    Product(String name , double price ){
         Date d = new Date();
         SimpleDateFormat date = new SimpleDateFormat("MM/dd/y");
         this.date = date.format(d);
@@ -36,6 +37,7 @@ public class Product {
         text = new Label(name);
         layout = new Pane();
         count = new Label("0");
+        totalPrice = new Label("0");
         add = new JFXButton("+");
         sub = new JFXButton("-");
         sub.setPrefWidth(30);
@@ -52,16 +54,18 @@ public class Product {
             if(amount != 1000){
                 amount++;
                 count.setText(String.valueOf(amount));
-                Main.order.addOrder(getProductName() , getTotal());
+                totalPrice.setText(String.valueOf(price * amount));
+                if(amount==1)
+                Main.order.addOrder(getProductName() , getTotalPrice());
             }
         });
         sub.setOnAction(e->{
             if(amount != 0){
                 amount--;
                 count.setText(String.valueOf(amount));
-                if(!layoutExist) {
-                    Main.order.addOrder(getProductName(), getTotal());
-                    layoutExist= true;
+                totalPrice.setText(String.valueOf(price * amount));
+                if(amount == 0) {
+
                 }
             }
         });
@@ -69,8 +73,8 @@ public class Product {
         this.price = price;
     }
 
-    public String getTotal() {
-        return  String.valueOf(price * amount);
+    public Label getTotalPrice() {
+        return  totalPrice;
     }
 
     private void setLayout(Labeled button , double x , double y){

@@ -3,28 +3,31 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
+import javax.xml.soap.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class Controller implements Initializable {
+public class Controller implements Initializable  {
 
     @FXML
     private VBox layout;
-
     @FXML
-    private ScrollPane scrollPane;
+    private VBox orderLayout;
+
 
     public static ChoiceBox box;
-
    private  AddMessage addMessage;
    private EditMessage editMessage;
+   public static VBox pane;
+   public static VBox orderPane;
+
+
+
 
 
 
@@ -33,14 +36,21 @@ public class Controller implements Initializable {
     }
     public void edit(ActionEvent event){
         editMessage.show();
-        box.getSelectionModel().select(0);
+       // box.getSelectionModel().select(0);
     }
 
+
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources){
         box = new ChoiceBox();
-        editMessage = new EditMessage(layout);
-        addMessage = new AddMessage(layout );
-        scrollPane.setContent(Main.order.getLayout());
+        pane = layout;
+        orderPane = orderLayout;
+        try {
+            editMessage = new EditMessage();
+        }
+        catch(Exception e){
+            System.out.println("err");
+        }
+        addMessage = new AddMessage();
     }
 }

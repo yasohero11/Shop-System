@@ -12,7 +12,8 @@
 
 <?import javafx.scene.layout.HBox?>
 <?import com.jfoenix.controls.JFXButton?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="769.0" prefWidth="1276.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="769.0" prefWidth="1276.0"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <HBox layoutX="36.0" spacing="90" alignment="CENTER" layoutY="673.0"  prefHeight="40.0" prefWidth="523.0" style="-fx-background-color: black;">
           <JFXButton fx:id="add" prefWidth="100" mnemonicParsing="false" onAction="#add" text="Add" style= "-fx-background-color: white">
@@ -39,7 +40,10 @@
             <FlowPane prefHeight="71.0" prefWidth="523.0" BorderPane.alignment="CENTER" />
          </bottom>
          <center>
-            <ScrollPane fx:id="scrollPane" prefHeight="377.0" prefWidth="523.0" BorderPane.alignment="CENTER" />
+            <ScrollPane fx:id="scrollPane" prefHeight="377.0" prefWidth="523.0" BorderPane.alignment="CENTER">
+               <content>
+                  <VBox fx:id="orderLayout" prefHeight="488.0" prefWidth="521.0" style="-fx-background-color: #2295E0;" />
+               </content></ScrollPane>
          </center></BorderPane>
       <TextField layoutX="36.0" layoutY="72.0" prefHeight="25.0" prefWidth="523.0" promptText="Search ...">
          <font>

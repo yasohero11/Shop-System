@@ -3,6 +3,7 @@ package sample;
 
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
@@ -16,7 +17,7 @@ public class AddMessage extends PopUpMessage {
     public TextField text1;
     public TextField text2;
 
-    public AddMessage(VBox pane ){
+    public AddMessage(){
 
         price = new Label("Price:");
         name = new Label("Name:");
@@ -28,10 +29,10 @@ public class AddMessage extends PopUpMessage {
         save.setOnAction(e->{
            if(text1.getLength() !=0 && text2.getLength() !=0){
                if(!exist(text1.getText())) {
-                   Product product = new Product(text1.getText(), Double.parseDouble(text2.getText()) , pane);
-                   pane.getChildren().add(product.getLayout());
+                   Product product = new Product(text1.getText(), Double.parseDouble(text2.getText()));
+                   Controller.pane.getChildren().add(product.getLayout());
                    Main.products.add(product);
-                   Controller.box.getItems().add(product.getProductName());
+                   EditController.view.getItems().add(product.getProductName());
                }
            }
 

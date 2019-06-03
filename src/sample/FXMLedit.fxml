@@ -10,15 +10,16 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="738.0"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.EditController">
    <left>
-      <ListView id="listView" prefHeight="360.0" prefWidth="311.0" BorderPane.alignment="CENTER" />
+      <ListView fx:id="listView" prefHeight="360.0" prefWidth="311.0" BorderPane.alignment="CENTER"/>
    </left>
    <center>
       <AnchorPane id="layout" prefHeight="478.0" prefWidth="324.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField id="name" layoutX="163.0" layoutY="167.0" prefHeight="25.0" prefWidth="205.0" />
-            <TextField id="price" layoutX="163.0" layoutY="213.0" />
+            <TextField fx:id="name" layoutX="163.0" layoutY="167.0" prefHeight="25.0" prefWidth="205.0" />
+            <TextField fx:id="price" layoutX="163.0" layoutY="213.0" />
             <Label layoutX="80.0" layoutY="171.0" prefHeight="17.0" prefWidth="50.0" text="Name :">
                <font>
                   <Font size="15.0" />
@@ -29,7 +30,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button id="save" layoutX="374.0" layoutY="395.0" mnemonicParsing="false" text="Save" />
+            <Button id="save"  layoutX="374.0" layoutY="395.0" mnemonicParsing="false" text="Save" />
          </children>
       </AnchorPane>
    </center>
