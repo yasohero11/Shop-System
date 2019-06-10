@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.util.LinkedList;
 
@@ -32,7 +33,7 @@ public class AddMessage extends PopUpMessage {
                    Product product = new Product(text1.getText(), Double.parseDouble(text2.getText()));
                    Controller.pane.getChildren().add(product.getLayout());
                    Main.products.add(product);
-                   EditController.view.getItems().add(product.getProductName());
+                   EditController.view.getItems().add(new Text(product.getProductName()));
                }
            }
 

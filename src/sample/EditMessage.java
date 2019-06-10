@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
@@ -16,12 +17,6 @@ import javafx.stage.Stage;
 
 public class EditMessage  extends PopUpMessage{
 
-    private GridPane pane;
-    protected TextField name;
-    private Label nameLabel;
-    private Button clear;
-    private Label priceLabel;
-    private TextField price;
     private Stage frame;
     public EditMessage()throws Exception{
         frame = new Stage();

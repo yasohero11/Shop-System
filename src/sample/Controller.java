@@ -34,6 +34,9 @@ public class Controller implements Initializable  {
     public void add(ActionEvent event){
        addMessage.show();
     }
+    public void buy(ActionEvent event){
+
+    }
     public void edit(ActionEvent event){
         editMessage.show();
        // box.getSelectionModel().select(0);
