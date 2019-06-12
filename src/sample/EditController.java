@@ -40,9 +40,10 @@ public class EditController implements Initializable {
         if(name.getLength() != 0 && price.getLength()!=0){
             Product product = getSelectedProduct();
             product.setProductName(name.getText());
+
             product.setPrice(Double.parseDouble(price.getText()));
             ((Text)listView.getSelectionModel().getSelectedItem()).setText(name.getText());
-            save.setDisable(true);
+            //save.setDisable(true);
             listView.refresh();
         }
 
@@ -82,7 +83,7 @@ public class EditController implements Initializable {
 
 
         };
-
+/*
         name.textProperty().addListener(e->{
             if(!oldName.equals("") && oldPrice != -1) {
                 if (!oldName.equalsIgnoreCase(name.getText())) {
@@ -107,8 +108,8 @@ public class EditController implements Initializable {
                     save.setDisable(true);
             }
         });
+        */
     }
-
     private Product getSelectedProduct(){
         int index = listView.getSelectionModel().getSelectedIndex();
         return Main.products.get(index);

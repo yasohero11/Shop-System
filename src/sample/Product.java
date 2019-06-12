@@ -20,6 +20,7 @@ public class Product {
     private String time;
     private Pane layout;
     private Label count;
+    private Label orderCount;
     private int amount = 0;
     private JFXButton add;
     private JFXButton sub;
@@ -34,7 +35,9 @@ public class Product {
         SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss a");
         this.time = time.format(d);
         this.name = name;
+        this.price = price;
         text = new Label(name);
+        orderCount = new Label("0");
         layout = new Pane();
         count = new Label("0");
         totalPrice = new Label("0");
@@ -54,15 +57,18 @@ public class Product {
             if(amount != 1000){
                 amount++;
                 count.setText(String.valueOf(amount));
-                totalPrice.setText(String.valueOf(price * amount));
+                orderCount.setText(String.valueOf(amount));
+                totalPrice.setText(String.valueOf(this.price * amount));
+                System.out.println(this.price + " a");
                 if(amount==1)
-                Main.order.addOrder(getProductName() , getTotalPrice());
+                Main.order.addOrder(getProductName(),this.price ,orderCount , getTotalPrice());
             }
         });
         sub.setOnAction(e->{
             if(amount != 0){
                 amount--;
                 count.setText(String.valueOf(amount));
+                orderCount.setText(String.valueOf(amount));
                 totalPrice.setText(String.valueOf(price * amount));
                 if(amount == 0) {
 
@@ -106,6 +112,7 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+
         amount=0;
         count.setText("0");
     }

@@ -18,13 +18,25 @@ public class Controller implements Initializable  {
     private VBox layout;
     @FXML
     private VBox orderLayout;
-
+    @FXML
+    private VBox namePane;
+    @FXML
+    private VBox pricePane;
+    @FXML
+    private VBox amountPane;
+    @FXML
+    private VBox totalPane;
 
     public static ChoiceBox box;
    private  AddMessage addMessage;
    private EditMessage editMessage;
    public static VBox pane;
    public static VBox orderPane;
+   public static VBox priceLayout;
+   public static VBox nameLayout;
+   public static VBox amountLayout;
+   public static VBox totalLayout;
+
 
 
 
@@ -48,6 +60,10 @@ public class Controller implements Initializable  {
         box = new ChoiceBox();
         pane = layout;
         orderPane = orderLayout;
+        nameLayout = namePane;
+        priceLayout = pricePane;
+        amountLayout = amountPane;
+        totalLayout = totalPane;
         try {
             editMessage = new EditMessage();
         }
