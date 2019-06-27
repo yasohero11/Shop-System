@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.stage.Stage?>
+
+
+<Stage  fx:id="stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.EditController">
+   <scene>
+      <Scene >
+         <root>
+            <BorderPane stylesheets="@../sample/style.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="752.0">
+               <left>
+                  <ListView fx:id="listView" prefHeight="405.0" prefWidth="330.0" BorderPane.alignment="CENTER" />
+               </left>
+               <center>
+                  <AnchorPane id="layout" prefHeight="478.0" prefWidth="324.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <TextField fx:id="name" disable="true" layoutX="163.0" layoutY="167.0" prefHeight="25.0" prefWidth="205.0" />
+                        <TextField fx:id="price" disable="true" layoutX="163.0" layoutY="213.0" />
+                        <Label layoutX="80.0" layoutY="171.0" prefHeight="17.0" prefWidth="50.0" text="Name :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="80.0" layoutY="217.0" prefHeight="17.0" prefWidth="39.0" text="Price:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="save" disable="true" layoutX="327.0" layoutY="293.0" mnemonicParsing="false" onAction="#onSave" text="Save" />
+                     </children>
+                  </AnchorPane>
+               </center>
+               <bottom>
+                  <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <buttons>
+                        <Button fx:id="clear" mnemonicParsing="false" onAction="#onClear" text="Clear" />
+                        <Button  fx:id="close" mnemonicParsing="false" onAction="#onClose" text="Close" />
+                     </buttons>
+                  </ButtonBar>
+               </bottom>
+               <top>
+                  <FlowPane prefHeight="38.0" prefWidth="738.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <TextField fx:id="search" prefHeight="33.0" prefWidth="331.0" promptText="Search...">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </FlowPane>
+               </top>
+            </BorderPane>
+         </root>
+      </Scene>
+   </scene>
+</Stage>

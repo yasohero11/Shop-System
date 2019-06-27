@@ -46,7 +46,7 @@ public abstract class PopUpMessage {
     protected void setCenter(Pane centerLayout){
         layout.setCenter(centerLayout);
     }
-    protected void show(){
+    public void show(){
         frame.show();
     }
     protected void close(){

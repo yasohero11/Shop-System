@@ -1,14 +1,11 @@
 package sample;
 
+import Control.Controller;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-
-
-import java.lang.invoke.MethodHandles;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -19,6 +16,7 @@ public class Order {
     private String date;
     private String time;
     private int counter = 0;
+    private boolean finished = false;
     LinkedList<OrderNode> list;
 
     Order() {
@@ -32,7 +30,33 @@ public class Order {
     public void addOrder(String productName, double price, Label count, Label totalPrice){
         OrderNode node = new OrderNode(productName , price ,count , totalPrice);
         list.add(node);
+        System.out.println(counter);
     }
+
+    public boolean isFinished() {
+        return finished;
+    }
+    public void setFinished(Boolean value){
+        finished = value;
+    }
+
+    public void deleteOrder(String name){
+                VBox layout = Controller.nameLayout;
+                for(int i = 0 ;  i < layout.getChildren().size(); i++) {
+                   // System.out.println(((Text)((HBox)layout.getChildren().get(i)).getChildren().get(0)).getText()+"  " +name);
+                    if (name.equals(((Text)((HBox)layout.getChildren().get(i)).getChildren().get(0)).getText())) {
+                        Controller.nameLayout.getChildren().remove(i);
+                        Controller.amountLayout.getChildren().remove(i);
+                        Controller.priceLayout.getChildren().remove(i);
+                        Controller.totalLayout.getChildren().remove(i);
+                        counter--;
+                        break;
+                    }
+                }
+            }
+
+
+
     public String getTime() {
         return time;
     }
@@ -46,18 +70,6 @@ public class Order {
 
     class OrderNode {
 
-/*
-    public void deleteOrder(String name ){
-        int size = layout.getChildren().size();
-        for(int i = 0 ;  i < size; i++) {
-            if (name.equals(((Text) layout.getChildren().get(i)).getText())) {
-                layout.getChildren().remove(i);
-
-                i = size;
-            }
-        }
-    }
-    */
          private String name;
          private String  amount;
          private double price;

@@ -1,5 +1,6 @@
 package sample;
 
+import Control.ErrorController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,13 +10,16 @@ import javafx.stage.Stage;
 import java.util.LinkedList;
 
 public class Main extends Application {
-    public static LinkedList<Product> products  = new LinkedList<>();
-    public static Order order = new Order();
+    public static Products products = new Products();
+    public static LinkedList<Order> orders = new LinkedList<>();
+
+
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("FXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../View/FXML.fxml"));
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 1300, 795));
+        Scene scene = new Scene(root, 1300, 795);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

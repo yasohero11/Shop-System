@@ -1,14 +1,15 @@
 package sample;
 
 
-import javafx.scene.control.ChoiceBox;
+import Control.Controller;
+import Control.DeleteController;
+import Control.EditController;
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-
-import java.util.LinkedList;
 
 public class AddMessage extends PopUpMessage {
 
@@ -29,16 +30,18 @@ public class AddMessage extends PopUpMessage {
         setCenter(layout);
         save.setOnAction(e->{
            if(text1.getLength() !=0 && text2.getLength() !=0){
-               if(!exist(text1.getText())) {
-                   Product product = new Product(text1.getText(), Double.parseDouble(text2.getText()));
-                   Controller.pane.getChildren().add(product.getLayout());
-                   Main.products.add(product);
-                   EditController.view.getItems().add(new Text(product.getProductName()));
-               }
-           }
+               if(!Product.exist(text1.getText())) {
+                 Products.addProduct(text1.getText(), Double.parseDouble(text2.getText()));
 
+                     System.out.println(Main.products.getSize());
+
+                   close();
+               }
+               else
+                   new ErrorMessage("The name you entered is already taken");
+           }
            reset();
-           close();
+
         });
 
         close.setOnAction(e->{
@@ -49,13 +52,7 @@ public class AddMessage extends PopUpMessage {
 
     }
 
-    private boolean exist(String name){
-        for(int i = 0; i < Main.products.size(); i++)
-            if(Main.products.get(i).getProductName().equalsIgnoreCase(name))
-                return true;
 
-        return false;
-    }
 
     private void reset(){
         text1.setText("");
