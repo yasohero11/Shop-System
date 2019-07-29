@@ -3,51 +3,65 @@ package sample;
 import Control.Controller;
 import Control.DeleteController;
 import Control.EditController;
-import javafx.scene.layout.FlowPane;
+
 import javafx.scene.text.Text;
 
 import java.util.LinkedList;
 
-public class Products {
-
-    private static LinkedList<Product> products =  new LinkedList<>();
+public class Products extends LinkedList<Product>{
 
 
-    public static void addProduct(String name ,  double price){
+
+
+    public  void addProduct(String name ,  double price){
         Product product = new Product(name , price);
         DeleteController.addToDeletePane(product);
         Controller.pane.getChildren().add(product.getLayout());
         EditController.view.getItems().add(new Text(product.getProductName()));
-        products.add(product);
+        add(product);
     }
 
     public void removeProduct(String productName){
-        for(int i  = 0;  i < products.size(); i++){
-            if(productName.equals(products.get(i).getProductName())){
-                products.remove(i);
-                Controller.clearOrderPane();
+        for(int i  = 0;  i < size(); i++){
+            if(productName.equals(get(i).getProductName())){
+                remove(i);
+               // Controller.clearOrderPane();
                 Controller.pane.getChildren().remove(i);
                 EditController.view.getItems().remove(i);
                 DeleteController.tempProductPane.getChildren().remove(i);
-                DeleteController.buttonP.getChildren().remove(i);
-                i = products.size();
+
+                i = size();
             }
         }
     }
-    public int getSize(){
-        return products.size();
+
+    public boolean exist(String name){
+        if(!isEmpty())
+            if(getProduct(name) != null)
+                return true;
+
+        return false;
+    }
+    public boolean exist(String name , int index){
+        for (int i = 0; i< size();i++)
+            if(i != index)
+                if(get(i).getProductName().equalsIgnoreCase(name))
+                    return true;
+
+        return false;
     }
 
+
     public Product getProduct(String name){
-        for(int i  = 0;  i < products.size(); i++)
-            if(name.equals(products.get(i).getProductName()))
-                return products.get(i);
+        for(int i  = 0;  i < size(); i++)
+            if(name.equals(get(i).getProductName()))
+                return get(i);
 
             return null;
     }
     public Product getProduct(int index){
-        if(!products.isEmpty())
-            return products.get(index);
+        if(!isEmpty())
+            return get(index);
 
         return null;
     }
@@ -63,17 +77,16 @@ public class Products {
       getProduct(name).reset();
     }
     public void resetAllProduct(){
-        for(int i  = 0;  i < products.size(); i++)
-            products.get(i).reset();
+        for(int i  = 0;  i < size(); i++)
+            get(i).reset();
     }
 
     public void clearProducts(){
-        products.clear();
+        clear();
         DeleteController.tempProductPane.getChildren().clear();
-        DeleteController.buttonP.getChildren().clear();
         Controller.pane.getChildren().clear();
         EditController.view.getItems().clear();
-        Controller.clearOrderPane();
+        Main.orders.getLast().clearOrder();
     }
 
 

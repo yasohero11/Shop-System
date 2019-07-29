@@ -9,11 +9,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sample.ErrorMessage;
 import sample.Main;
 import sample.Product;
+import sample.Products;
 
 
 import javax.swing.*;
@@ -41,16 +43,19 @@ public class EditController implements Initializable {
 
     public void onSave(ActionEvent event){
         if(name.getLength() != 0 && price.getLength()!=0){
-         if(!sample.Product.exist(name.getText())) {
-             product = getSelectedProduct();
+         if(!Main.products.exist(name.getText() , view.getSelectionModel().getSelectedIndex())) {
              product.setProductName(name.getText());
              Main.products.resetAllProduct();
              product.setPrice(Double.parseDouble(price.getText()));
              ((Text) listView.getSelectionModel().getSelectedItem()).setText(name.getText());
-             ((Text)((FlowPane)DeleteController.tempProductPane.getChildren().get(
+
+             ((Text)((Pane)DeleteController.tempProductPane.getChildren().get(
                      listView.getSelectionModel().getSelectedIndex())).getChildren().get(0)).setText(name.getText());
+
              save.setDisable(true);
-             Controller.clearOrderPane();
+             if(!Main.orders.isEmpty())
+             Main.orders.getLast().clearOrder();
+
              listView.refresh();
          }
          else
@@ -63,9 +68,7 @@ public class EditController implements Initializable {
         name.setDisable(true);
         price.setDisable(true);
     }
-    public void onClose(ActionEvent event){
-     stage.close();
-    }
+    public void onClose(ActionEvent event){ stage.close(); }
 
     public void onChange(InputEvent event){
 
@@ -86,6 +89,7 @@ public class EditController implements Initializable {
                 save.setDisable(true);
                 name.setText(product.getProductName());
                 price.setText(String.valueOf(product.getPrice()));
+
             }
            // System.out.println(product.getProductName() + " " + product.getPrice() );
         });
@@ -126,7 +130,7 @@ public class EditController implements Initializable {
         search.textProperty().addListener(e->{
             listView.getItems().clear();
             if(search.getLength() != 0){
-                for(int i  = 0 ;  i < Main.products.getSize();i++) {
+                for(int i  = 0 ;  i < Main.products.size();i++) {
                     Product product = Main.products.getProduct(i);
                     if (product.getProductName().startsWith(search.getText()))
                         listView.getItems().add(new Text(product.getProductName()));
@@ -135,7 +139,7 @@ public class EditController implements Initializable {
 
             }
             else
-                for(int i  = 0 ;  i < Main.products.getSize();i++) {
+                for(int i  = 0 ;  i < Main.products.size();i++) {
                    // System.out.println(Main.products.getSize() + " " +Main.products.getProduct(i).getProductName());
 
                     listView.getItems().add(new Text(Main.products.getProduct(i).getProductName()));

@@ -1,53 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.layout.HBox?>
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.layout.Pane?>
-<AnchorPane stylesheets="@../sample/style.css"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="769.0" prefWidth="1276.0"
-            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.Controller">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="829.0" prefWidth="1276.0" stylesheets="@../Styles/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.Controller">
    <children>
-      <HBox layoutX="36.0" spacing="90" alignment="CENTER" layoutY="673.0"  prefHeight="40.0" prefWidth="523.0" style="-fx-background-color: black;">
-          <JFXButton fx:id="add" prefWidth="100" mnemonicParsing="false" onAction="#add" text="Add" >
-               <opaqueInsets>
-                  <Insets right="20.0" />
-               </opaqueInsets>
-            </JFXButton>
-            <JFXButton fx:id="edit" onAction="#edit" prefWidth="100" mnemonicParsing="false" text="Edit" >
+      <HBox alignment="CENTER" layoutX="36.0" layoutY="673.0" prefHeight="40.0" prefWidth="523.0" spacing="30.0" style="-fx-background-color: black;">
+          <Button fx:id="add" mnemonicParsing="false" onAction="#add" prefWidth="100" text="Add">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
-            </JFXButton>
-            <JFXButton fx:id="delete" onAction="#onDelete" prefWidth="100" mnemonicParsing="false" text="Delete"/>
+            </Button>
+            <Button fx:id="edit" mnemonicParsing="false" onAction="#edit" prefWidth="100" text="Edit">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="delete" mnemonicParsing="false" onAction="#onDelete" prefWidth="100" text="Delete" />
+         <Button fx:id="history" onAction="#onHistory" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="History" />
       </HBox>
-      <BorderPane layoutX="692.0" layoutY="23.0" prefHeight="691.0" prefWidth="523.0" style="-fx-background-color: green;">
+      <BorderPane fx:id="orderLayout" layoutX="692.0" layoutY="23.0" prefHeight="691.0" prefWidth="523.0" style="-fx-background-color: green;">
          <bottom>
-            <FlowPane prefHeight="71.0" prefWidth="523.0" BorderPane.alignment="CENTER" />
+            <FlowPane fx:id="dataPane" hgap="20" prefHeight="81.0" prefWidth="523.0" style="@../Styles/textStyle.css" BorderPane.alignment="CENTER" />
          </bottom>
-         <center>
-            <ScrollPane  prefHeight="377.0" prefWidth="523.0" BorderPane.alignment="CENTER">
-               <content>
-                  <FlowPane prefHeight="479.0" prefWidth="509.0">
-                     <children>
-                        <VBox fx:id="namePane" prefHeight="483.0" prefWidth="226.0" />
-                        <VBox fx:id="amountPane" prefHeight="483.0" prefWidth="89.0" />
-                        <VBox fx:id="pricePane" prefHeight="483.0" prefWidth="89.0" />
-                        <VBox fx:id="totalPane" prefHeight="483.0" prefWidth="104.0" />
-                     </children>
-                  </FlowPane>
-               </content></ScrollPane>
-         </center>
          <top>
-            <VBox prefHeight="140.0" prefWidth="523.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="100.0" prefWidth="523.0" BorderPane.alignment="CENTER">
                <children>
                   <Pane prefHeight="107.0" prefWidth="523.0">
                      <children>
@@ -58,49 +47,19 @@
                         </Text>
                      </children>
                   </Pane>
-                  <FlowPane prefHeight="42.0" prefWidth="523.0">
-                     <children>
-                        <HBox  prefHeight="37.0" prefWidth="226.0" style="-fx-background-color: red;">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="69.693359375">
-                                 <font>
-                                    <Font size="22.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="37.0" prefWidth="89.0" style="-fx-background-color: red;">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Amount" wrappingWidth="80.693359375">
-                                 <font>
-                                    <Font size="22.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="37.0" prefWidth="89.0" style="-fx-background-color: red;">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="  Price" wrappingWidth="69.693359375">
-                                 <font>
-                                    <Font size="22.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="37.0" prefWidth="119.0" style="-fx-background-color: red;">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Total" wrappingWidth="83.693359375">
-                                 <font>
-                                    <Font size="22.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </HBox>
-                     </children>
-                  </FlowPane>
                </children>
             </VBox>
-         </top></BorderPane>
+         </top>
+         <center>
+            <TableView fx:id="table" editable="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="nameCell" prefWidth="209.0" text="Product Name" />
+                <TableColumn fx:id="amountCell" minWidth="0.0" prefWidth="103.0" text="Amount" />
+                  <TableColumn fx:id="priceCell" prefWidth="79.0" text="Price" />
+                  <TableColumn fx:id="totalCell" prefWidth="131.0" text="Total" />
+              </columns>
+            </TableView>
+         </center></BorderPane>
       <TextField fx:id="search" layoutX="36.0" layoutY="23.0" prefHeight="25.0" prefWidth="523.0" promptText="Search ...">
          <font>
             <Font size="14.0" />
@@ -108,14 +67,14 @@
       </TextField>
       <ScrollPane fx:id="scrollPane" layoutX="36.0" layoutY="53.0" prefHeight="613.0" prefWidth="523.0">
          <content>
-            <VBox fx:id="layout" minHeight="564.0" minWidth="523.0" prefHeight="608.0" prefWidth="523.0" spacing="10" style="-fx-background-color: red;" />
+            <VBox fx:id="layout" minHeight="608.0" minWidth="523.0" spacing="10" style="-fx-background-color: black;" />
          </content>
       </ScrollPane>
       <FlowPane prefHeight="200.0" prefWidth="200.0" />
-      <JFXButton onAction="#onBuy" layoutX="1128.0"  layoutY="722.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="87.0" text="Buy" textFill="#030fee">
+      <Button layoutX="1128.0" layoutY="722.0" mnemonicParsing="false" onAction="#onBuy" prefHeight="30.0" prefWidth="87.0" text="Buy" textFill="#030fee">
          <font>
             <Font size="18.0" />
          </font>
-      </JFXButton>
+      </Button>
    </children>
 </AnchorPane>

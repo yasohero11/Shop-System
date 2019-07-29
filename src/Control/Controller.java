@@ -1,18 +1,18 @@
 package Control;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import sample.AddMessage;
-import sample.EditMessage;
-import sample.Main;
-import sample.Product;
+import sample.*;
+import sample.Order.OrderNode;
 
 import javax.xml.soap.Text;
 import java.io.IOException;
@@ -24,31 +24,36 @@ public class Controller implements Initializable  {
 
     @FXML
     private VBox layout;
-    @FXML
-    private VBox namePane;
-    @FXML
-    private VBox pricePane;
-    @FXML
-    private VBox amountPane;
-    @FXML
-    private VBox totalPane;
+
     @FXML
     private TextField search;
     @FXML
     private ScrollPane scrollPane;
     @FXML
-    private FlowPane productPane;
+    private TableColumn<OrderNode,String> nameCell;
+    @FXML
+    private TableColumn<OrderNode,Integer> amountCell;
+    @FXML
+    private TableColumn<OrderNode,Double> priceCell;
+    @FXML
+    private TableColumn<OrderNode,Double> totalCell;
+    @FXML
+    private BorderPane orderLayout;
+    @FXML
+    private TableView<OrderNode> table;
+    @FXML
+    private FlowPane dataPane;
 
+   public static TableView<OrderNode> tableView;
    public static ChoiceBox box;
    private AddMessage addMessage;
    private EditMessage editMessage;
+   private VBox deletePane;
+   public static BorderPane orderPane;
    public static VBox pane;
-   public static VBox orderPane;
-   public static VBox priceLayout;
-   public static VBox nameLayout;
-   public static VBox amountLayout;
-   public static VBox totalLayout;
-   private BorderPane borderPane;
+   public static FlowPane dataLayout ;
+
+
 
    private int count = 0;
 
@@ -65,21 +70,36 @@ public class Controller implements Initializable  {
 
     }
     public void edit(ActionEvent event){
-         editMessage.show();
+        editMessage.show();
+
        // box.getSelectionModel().select(0);
     }
 
     public void onBuy(ActionEvent event){
-        if(Main.orders.size() != 0) {
-            Main.orders.getLast().setFinished(true);
-            clearOrderPane();
+        Order order =Main.orders.getLast();
+        if(Main.orders.size() != 0 && !order.isEmpty() && !order.isFinished()) {
+            order.cloneTable(table);
+            order.setFinished(true);
             Main.products.resetAllProduct();
+            table.setItems(null);
+
+            /*
+            for (Order i:Main.orders){
+                for(OrderNode n: i.dates){
+                    System.out.println(n.getName() +" "+n.getAmount()+" " +n.getPrice()+" " +" " +n.getTotal());
+                }
+                System.out.println("-------------------");
+            }
+            */
         }
+    }
+    public void onHistory(ActionEvent event){
+        HistoryController.historyStage.show();
     }
 
     public void onDelete(ActionEvent event) {
         if(count % 2 == 0) {
-            scrollPane.setContent(DeleteController.temPBorderPane);
+            scrollPane.setContent(DeleteController.tempProductPane);
             ((Button)event.getSource()).setTextFill(Color.WHITE);
             ((Button)event.getSource()).setStyle("-fx-background-color:#797D7F");
         }
@@ -92,14 +112,6 @@ public class Controller implements Initializable  {
         count++;
 
     }
-    public static void clearOrderPane(){
-        nameLayout.getChildren().clear();
-        amountLayout.getChildren().clear();
-        priceLayout.getChildren().clear();
-        totalLayout.getChildren().clear();
-        if(!Main.orders.isEmpty()&& !Main.orders.getLast().isFinished())
-            Main.orders.remove(Main.orders.size()-1);
-    }
 
     public void resetAllProductes(){
 
@@ -108,20 +120,21 @@ public class Controller implements Initializable  {
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
+        tableView =table;
+        orderPane=orderLayout;
+        dataLayout = dataPane;
 
         try {
-            borderPane = FXMLLoader.load(getClass().getResource("../View/FXMLdelete.fxml"));
+            deletePane = FXMLLoader.load(getClass().getResource("../View/FXMLdelete.fxml"));
+            FXMLLoader.load(getClass().getResource("../View/historyPane.fxml"));
         }
         catch(IOException e){
             System.out.println(e.getMessage());
         }
 
         box = new ChoiceBox();
-        pane = layout;
-        nameLayout = namePane;
-        priceLayout = pricePane;
-        amountLayout = amountPane;
-        totalLayout = totalPane;
+        pane=layout;
+
         try {
             editMessage = new EditMessage();
         }
@@ -133,9 +146,8 @@ public class Controller implements Initializable  {
         search.textProperty().addListener(e->{
             pane.getChildren().clear();
             DeleteController.tempProductPane.getChildren().clear();
-            DeleteController.buttonP.getChildren().clear();
             if(search.getLength() != 0){
-                for(int i  = 0 ;  i < Main.products.getSize();i++) {
+                for(int i  = 0 ;  i < Main.products.size();i++) {
                     Product product = Main.products.getProduct(i);
                     if (product.getProductName().startsWith(search.getText())) {
                         pane.getChildren().add(product.getLayout());
@@ -144,13 +156,37 @@ public class Controller implements Initializable  {
                 }
 
             }else
-                for(int i  = 0 ;  i < Main.products.getSize();i++) {
+                for(int i  = 0 ;  i < Main.products.size();i++) {
                     layout.getChildren().add(Main.products.getProduct(i).getLayout());
                     DeleteController.addToDeletePane(Main.products.getProduct(i));
                 }
 
 
         });
+        Main.products.addProduct("ahmedddddddddddddd" , 15);
+        Main.products.addProduct("khaled" , 1);
+        Main.products.addProduct("moahmed" , 5);
+        Main.products.addProduct("koko" , 20);
+        Main.products.addProduct("mohsen" , 10);
+        Main.products.addProduct("ahme" , 15);
+        Main.products.addProduct("khale" , 1);
+        Main.products.addProduct("moahme" , 5);
+        Main.products.addProduct("kok" , 20);
+        Main.products.addProduct("mohse" , 10);
+        Main.products.addProduct("ahm" , 15);
+        Main.products.addProduct("khal" , 1);
+        Main.products.addProduct("moahm" , 5);
+        Main.products.addProduct("ko" , 20);
+        Main.products.addProduct("mohs" , 10);
+        Main.products.addProduct("ah" , 15);
+        Main.products.addProduct("kha" , 1);
+        Main.products.addProduct("moah" , 5);
+        Main.products.addProduct("k" , 20);
+        Main.products.addProduct("moh" , 10);
+      nameCell.setCellValueFactory(new PropertyValueFactory<>("name"));
+      amountCell.setCellValueFactory(new PropertyValueFactory<>("amount"));
+      priceCell.setCellValueFactory(new PropertyValueFactory<>("price"));
+      totalCell.setCellValueFactory(new PropertyValueFactory<>("total"));
     }
 
 

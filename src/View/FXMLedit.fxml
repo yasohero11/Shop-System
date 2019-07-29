@@ -17,7 +17,7 @@
    <scene>
       <Scene >
          <root>
-            <BorderPane stylesheets="@../sample/style.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="752.0">
+            <BorderPane stylesheets="@../Styles/style.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="752.0">
                <left>
                   <ListView fx:id="listView" prefHeight="405.0" prefWidth="330.0" BorderPane.alignment="CENTER" />
                </left>

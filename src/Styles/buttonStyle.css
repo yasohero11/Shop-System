@@ -1,0 +1,8 @@
+.jfx-button{
+-fx-background-radius :100%;
+-fx-margin: 10px;
+}
+.jfx-button{
+    -fx-padding: 4px;
+    -fx-border-insets: 5px;
+}

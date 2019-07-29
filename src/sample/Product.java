@@ -8,6 +8,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 ;
@@ -21,12 +23,12 @@ public class Product implements Comparable<Product> {
     private String time;
     private Pane layout;
     private Label count;
-    private Label orderCount;
+
     private int amount = 0;
     private JFXButton add;
     private JFXButton sub;
     private Label text;
-    Label totalPrice;
+
     private boolean layoutExist =  false;
     public JFXButton deleteButton;
 
@@ -39,28 +41,35 @@ public class Product implements Comparable<Product> {
         this.name = name;
         this.price = price;
         text = new Label(name);
-        deleteButton = new JFXButton("X");
-        deleteButton.setAlignment(Pos.TOP_CENTER);
-        orderCount = new Label("0");
+        deleteButton = new JFXButton("");
+        deleteButton.setLayoutX(475);
+        deleteButton.setLayoutY(1);
+
+        Image image = new Image("images/delete.png" );
+        ImageView imageView = new ImageView(image );
+        imageView.setFitWidth(20);
+        imageView.setFitHeight(20);
+
+        deleteButton.setGraphic(imageView);
+
         layout = new Pane();
         count = new Label("0");
-        totalPrice = new Label("0");
         add = new JFXButton("+");
         sub = new JFXButton("-");
-        sub.setPrefWidth(30);
-        add.setPrefWidth(30);
-        layout.setPrefSize(523 , 25);
+        sub.setPrefSize(30 , 30);
+        add.setPrefSize(30,30);
+        layout.setPrefSize(523 , 30);
         setLayout(text , 0 , 0);
-        setLayout(add , 400 , 0);
-        setLayout(count ,  450 , 3);
-        setLayout(sub , 480 , 0);
+        setLayout(add , 398 , 0);
+        setLayout(count ,  448 , 3);
+        setLayout(sub , 478 , 0);
         layout.getChildren().addAll(text ,add , count , sub);
         layout.setStyle("-fx-background-color : white");
 
         add.setOnMouseClicked(e->{
             if(amount != 1000){
                 amount++;
-                refresh();
+                count.setText(String.valueOf(amount));
                 if(!Main.orders.isEmpty()){
                     if(Main.orders.getLast().isFinished()) {
                         Order order = new Order();
@@ -72,16 +81,16 @@ public class Product implements Comparable<Product> {
                     Main.orders.add(order);
                 }
                 if(amount==1)
-                Main.orders.getLast().addOrder(getProductName(),this.price ,orderCount , getTotalPrice());
+                Main.orders.getLast().addOrder(getProductName(),this.price ,count );
             }
         });
         sub.setOnAction(e->{
             if(amount != 0){
                 amount--;
-                refresh();
+                count.setText(String.valueOf(amount));
                 if(amount == 0) {
-                 Main.orders.getLast().deleteOrder(this.name);
-                 if(Controller.nameLayout.getChildren().size() == 0 && !Main.orders.getLast().isFinished())
+                  Main.orders.getLast().deleteOrder(this.name);
+                 if(Main.orders.getLast().list.isEmpty())
                      Main.orders.remove(Main.orders.size()-1);
                 }
             }
@@ -89,6 +98,8 @@ public class Product implements Comparable<Product> {
         deleteButton.setOnAction(e->{
          Main.products.removeProduct(this.name);
          Main.products.resetAllProduct();
+         if(!Main.orders.isEmpty())
+         Main.orders.getLast().clearOrder();
         });
 
         /*
@@ -98,27 +109,16 @@ public class Product implements Comparable<Product> {
         */
     }
 
-    private void refresh(){
-        count.setText(String.valueOf(amount));
-        orderCount.setText(String.valueOf(amount));
-        totalPrice.setText(String.valueOf(this.price * amount));
-    }
 
     public void reset(){
         amount = 0;
-        refresh();
+        count.setText("0");
     }
 
-    public static boolean exist(String name){
-        if(Main.products.getSize() !=0)
-            if(Main.products.getProduct(name) != null)
-                return true;
 
-        return false;
-    }
 
-    public Label getTotalPrice() {
-        return  totalPrice;
+    public double getTotalPrice() {
+        return  amount*price;
     }
 
 
@@ -139,19 +139,14 @@ public class Product implements Comparable<Product> {
         return name;
     }
     public void setProductName(String newName){
-
         name =  newName;
-        System.out.println(newName + " " + name);
         text.setText(name);
-        amount=0;
-        count.setText("0");
+        reset();
     }
 
     public void setPrice(double price) {
         this.price = price;
-
-        amount=0;
-        count.setText("0");
+        reset();
     }
 
     public String getTime() {

@@ -15,7 +15,7 @@
    <scene >
       <Scene>
          <root>
-            <BorderPane stylesheets="@../sample/style.css"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="148.0" prefWidth="406.0">
+            <BorderPane stylesheets="@../Styles/style.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="148.0" prefWidth="406.0">
                <bottom>
                   <Button onAction="#close" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" text="OK" BorderPane.alignment="CENTER" />
                </bottom>

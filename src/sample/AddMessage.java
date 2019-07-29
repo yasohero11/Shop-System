@@ -30,10 +30,10 @@ public class AddMessage extends PopUpMessage {
         setCenter(layout);
         save.setOnAction(e->{
            if(text1.getLength() !=0 && text2.getLength() !=0){
-               if(!Product.exist(text1.getText())) {
-                 Products.addProduct(text1.getText(), Double.parseDouble(text2.getText()));
+               if(!Main.products.exist(text1.getText())) {
+                 Main.products.addProduct(text1.getText(), Double.parseDouble(text2.getText()));
 
-                     System.out.println(Main.products.getSize());
+                     //System.out.println(Main.products.size());
 
                    close();
                }
