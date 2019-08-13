@@ -6,14 +6,65 @@ import Control.EditController;
 
 import javafx.scene.text.Text;
 
+import java.io.*;
 import java.util.LinkedList;
 
 public class Products extends LinkedList<Product>{
+
+    private PrintWriter writer;
+    private BufferedReader reader;
+    private boolean doneReading = false;
+    public Products(){
+        try {
+            File file = new File("products.txt");
+            if (file.exists()) {
+                reader = new BufferedReader(new FileReader(file));
+
+
+                String line = reader.readLine();
+
+                while (line != null) {
+
+                    addProduct(line.substring(0, line.indexOf('$')), Double.parseDouble(line.substring(line.indexOf('$') + 1)));
+                    line = reader.readLine();
+                }
+                reader.close();
+            }
+            doneReading = true;
+            writer = new PrintWriter("products.txt");
+            writeAll();
+
+        }
+        catch (Exception e){
+            System.out.print(e + " products");
+        }
+
+
+    }
+
+    public void writeAll(){
+        try {
+            writer = new PrintWriter("products.txt");
+            for(Product product : this)
+                writer.println(product.getProductName() + "$" + product.getPrice());
+            writer.flush();
+        }
+        catch (IOException e){
+            System.out.println(e + "from products class");
+        }
+
+    }
 
 
 
 
     public  void addProduct(String name ,  double price){
+
+        if(doneReading) {
+            writer.println(name + "$" + price);
+            writer.flush();
+        }
+
         Product product = new Product(name , price);
         DeleteController.addToDeletePane(product);
         Controller.pane.getChildren().add(product.getLayout());
@@ -25,7 +76,7 @@ public class Products extends LinkedList<Product>{
         for(int i  = 0;  i < size(); i++){
             if(productName.equals(get(i).getProductName())){
                 remove(i);
-               // Controller.clearOrderPane();
+                // Controller.clearOrderPane();
                 Controller.pane.getChildren().remove(i);
                 EditController.view.getItems().remove(i);
                 DeleteController.tempProductPane.getChildren().remove(i);
@@ -35,12 +86,11 @@ public class Products extends LinkedList<Product>{
         }
     }
 
-    public boolean exist(String name){
+    public Product exist(String name){
         if(!isEmpty())
-            if(getProduct(name) != null)
-                return true;
+            return getProduct(name);
 
-        return false;
+        return null;
     }
     public boolean exist(String name , int index){
         for (int i = 0; i< size();i++)
@@ -57,7 +107,7 @@ public class Products extends LinkedList<Product>{
             if(name.equals(get(i).getProductName()))
                 return get(i);
 
-            return null;
+        return null;
     }
     public Product getProduct(int index){
         if(!isEmpty())
@@ -74,7 +124,7 @@ public class Products extends LinkedList<Product>{
 
     */
     public void resetProduct(String name){
-      getProduct(name).reset();
+        getProduct(name).reset();
     }
     public void resetAllProduct(){
         for(int i  = 0;  i < size(); i++)
@@ -86,7 +136,6 @@ public class Products extends LinkedList<Product>{
         DeleteController.tempProductPane.getChildren().clear();
         Controller.pane.getChildren().clear();
         EditController.view.getItems().clear();
-        Main.orders.getLast().clearOrder();
     }
 
 

@@ -6,18 +6,22 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.stage.Stage?>
 
+<Stage fx:id="stage" alwaysOnTop="true" title="Edit Panel" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.EditController">
+   <icons>
+         <Image url="@../images/edit.png" />
+   </icons>
 
-<Stage  fx:id="stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.EditController">
    <scene>
-      <Scene >
+      <Scene>
          <root>
-            <BorderPane stylesheets="@../Styles/style.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="752.0">
+            <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="752.0" stylesheets="@../Styles/style.css">
                <left>
                   <ListView fx:id="listView" prefHeight="405.0" prefWidth="330.0" BorderPane.alignment="CENTER" />
                </left>
@@ -44,7 +48,7 @@
                   <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <buttons>
                         <Button fx:id="clear" mnemonicParsing="false" onAction="#onClear" text="Clear" />
-                        <Button  fx:id="close" mnemonicParsing="false" onAction="#onClose" text="Close" />
+                        <Button fx:id="close" mnemonicParsing="false" onAction="#onClose" text="Close" />
                      </buttons>
                   </ButtonBar>
                </bottom>

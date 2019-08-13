@@ -11,8 +11,8 @@ import javafx.scene.control.Labeled;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import org.omg.CORBA.MARSHAL;
 
-;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,14 +22,14 @@ public class Product implements Comparable<Product> {
     private String date;
     private String time;
     private Pane layout;
-    private Label count;
+    public  Label count;
 
     private int amount = 0;
     private JFXButton add;
     private JFXButton sub;
     private Label text;
 
-    private boolean layoutExist =  false;
+
     public JFXButton deleteButton;
 
     Product(String name , double price ){
@@ -42,13 +42,16 @@ public class Product implements Comparable<Product> {
         this.price = price;
         text = new Label(name);
         deleteButton = new JFXButton("");
-        deleteButton.setLayoutX(475);
-        deleteButton.setLayoutY(1);
+        deleteButton.setLayoutX(470);
+        deleteButton.setLayoutY(-3);
 
-        Image image = new Image("images/delete.png" );
-        ImageView imageView = new ImageView(image );
-        imageView.setFitWidth(20);
+        Image image = new Image("images/close.png" );
+
+        ImageView imageView = new ImageView(image);
+
+        imageView.setFitWidth(15);
         imageView.setFitHeight(20);
+        deleteButton.setPrefHeight(37);
 
         deleteButton.setGraphic(imageView);
 
@@ -59,47 +62,58 @@ public class Product implements Comparable<Product> {
         sub.setPrefSize(30 , 30);
         add.setPrefSize(30,30);
         layout.setPrefSize(523 , 30);
-        setLayout(text , 0 , 0);
-        setLayout(add , 398 , 0);
-        setLayout(count ,  448 , 3);
-        setLayout(sub , 478 , 0);
+        setLayout(text , 0 , layout.getPrefHeight()/5);
+        setLayout(add , 390 , -3);
+        setLayout(count ,  440 , 3);
+        setLayout(sub , 470 , -3);
         layout.getChildren().addAll(text ,add , count , sub);
-        layout.setStyle("-fx-background-color : white");
-
-        add.setOnMouseClicked(e->{
-            if(amount != 1000){
+        layout.setStyle("-fx-background-color : gray");
+        add.setId("addButton");
+        sub.setId("subButton");
+        add.setOnAction(e->{
+            if(amount != 10000) {
                 amount++;
                 count.setText(String.valueOf(amount));
-                if(!Main.orders.isEmpty()){
-                    if(Main.orders.getLast().isFinished()) {
-                        Order order = new Order();
-                        Main.orders.add(order);
-                    }
-                }else
-                {
-                    Order order = new Order();
-                    Main.orders.add(order);
-                }
-                if(amount==1)
-                Main.orders.getLast().addOrder(getProductName(),this.price ,count );
             }
         });
+
+        // property
+
+        count.textProperty().addListener(e->{
+            Order order = Main.getUnFinshedOrder();
+            if(order == null && !count.getText().equals("0")){
+                Date date1 = new Date();
+                order = new Order(new SimpleDateFormat("MM/y").format(date1),
+                        new SimpleDateFormat("MM/dd/y").format(date1),new SimpleDateFormat("hh:mm:ss a").format(date1));
+                Main.orders.add(order);
+
+            }
+
+            if(amount==1)
+                order.addOrder(getProductName(), this.price, count);
+
+
+            if(amount == 0 && order != null) {
+                order.deleteOrder(this.name);
+                if(order.list.isEmpty()) {
+                    order.clearOrder();
+                }
+
+            }
+
+        });
+
+
         sub.setOnAction(e->{
             if(amount != 0){
                 amount--;
                 count.setText(String.valueOf(amount));
-                if(amount == 0) {
-                  Main.orders.getLast().deleteOrder(this.name);
-                 if(Main.orders.getLast().list.isEmpty())
-                     Main.orders.remove(Main.orders.size()-1);
-                }
             }
         });
         deleteButton.setOnAction(e->{
-         Main.products.removeProduct(this.name);
-         Main.products.resetAllProduct();
-         if(!Main.orders.isEmpty())
-         Main.orders.getLast().clearOrder();
+            Main.sync(this);
+            Controller.products.removeProduct(this.name);
+            Controller.products.writeAll();
         });
 
         /*
@@ -109,6 +123,13 @@ public class Product implements Comparable<Product> {
         */
     }
 
+
+    public void setCount(String count) {
+        amount=1;
+        this.count.setText(String.valueOf(amount));
+        amount=Integer.parseInt(count);
+        this.count.setText(count);
+    }
 
     public void reset(){
         amount = 0;

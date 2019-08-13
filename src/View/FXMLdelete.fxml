@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
+
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="productPane" spacing="10"  stylesheets="@../Styles/buttonStyle.css" style="-fx-background-color: black;"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="608.0"  minWidth="523.0"
-            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.DeleteController">
+<VBox fx:id="productPane" minHeight="539.0" minWidth="521.0"  spacing="14" style="-fx-padding:10px 0px" stylesheets="@../Styles/buttonStyle.css"  maxHeight="-Infinity"
+      xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.DeleteController">
 
 </VBox>

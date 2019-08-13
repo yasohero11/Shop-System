@@ -40,12 +40,6 @@ public abstract class PopUpMessage {
     }
 
 
-    protected void setBottom(Node item){
-        bottomLayout.getChildren().add(1 , item);
-    }
-    protected void setCenter(Pane centerLayout){
-        layout.setCenter(centerLayout);
-    }
     public void show(){
         frame.show();
     }
@@ -57,17 +51,6 @@ public abstract class PopUpMessage {
         this.contiue = contiue;
     }
 
-    protected boolean getContinue(){
-        return contiue;
-    }
-
-    protected void setTittle(String tittle){
-        frame.setTitle(tittle);
-    }
-
-    protected void setIcon(Image img){
-        frame.getIcons().add(img);
-    }
     protected BorderPane getLayout() {
         return layout;
     }

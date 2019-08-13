@@ -1,0 +1,8 @@
+.button{
+  -fx-background-color: linear-gradient(to right, #8e2de2, #4a00e0);
+  -fx-text-fill:white;
+  -fx-font-size:17px;
+  -fx-background-radius: 30px;
+  -fx-effect: dropshadow(three-pass-box, black, 20, 0, 0, 0 );
+  -fx-pref-width: 130px;
+}

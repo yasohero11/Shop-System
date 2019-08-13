@@ -12,6 +12,9 @@
 
 
 <Stage fx:id="stage" title="Error Message!!" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.ErrorController">
+   <icons>
+      <Image url="@../images/error.png" />
+   </icons>
    <scene >
       <Scene>
          <root>

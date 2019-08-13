@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.stage.Stage?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<Stage fx:id="stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.OpeningScreenControl">
+    <scene>
+        <Scene>
+            <VBox>
+                <children>
+                    <HBox stylesheets="@../Styles/topBarButtonStyle.css" alignment="CENTER_RIGHT" fx:id="hBox" prefHeight="35.0" prefWidth="710.0" spacing="5.0" style="-fx-background-color: #1A1A1A;">
+                        <children>
+                            <AnchorPane prefHeight="23.0" prefWidth="636.0">
+                                <children>
+                                    <Text fill="WHITE" layoutX="59.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Panel" wrappingWidth="81.13671875">
+                                        <font>
+                                            <Font size="15.0" />
+                                        </font>
+                                    </Text>
+                                </children>
+                            </AnchorPane>
+                            <JFXButton mnemonicParsing="false" onAction="#onMini" prefHeight="25.0" prefWidth="28.0" style="-fx-graphic:url(images/mini.png);" />
+                            <JFXButton mnemonicParsing="false" onAction="#onClose" style="-fx-graphic:url(images/close2.png);" />
+                        </children>
+                        <padding>
+                            <Insets right="10.0" />
+                        </padding>
+                    </HBox>
+                    <AnchorPane prefHeight="710.0" prefWidth="710.0" style="-fx-background-color: linear-gradient(to right bottom,  #c31432, #240b36);">
+                        <children>
+                            <AnchorPane layoutX="181.0" layoutY="165.0" prefHeight="511.0" prefWidth="349.0" style="-fx-background-color: rgb(0,0,0,0.5); -fx-background-radius: 30;">
+                                <children>
+                                    <Text fill="WHITE" layoutX="32.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Company Name">
+                                        <font>
+                                            <Font size="15.0" />
+                                        </font>
+                                    </Text>
+                                    <Text fill="WHITE" layoutX="32.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Company Address">
+                                        <font>
+                                            <Font size="15.0" />
+                                        </font>
+                                    </Text>
+                                    <Text fill="WHITE" layoutX="55.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Your Data">
+                                        <font>
+                                            <Font size="37.0" />
+                                        </font>
+                                    </Text>
+                                    <TextField fx:id="nameField" layoutX="33.0" layoutY="166.0" prefHeight="31.0" prefWidth="285.0" />
+                                    <Button onAction="#onChoose" fx:id="chooser" layoutX="233.0" layoutY="340.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" style="-fx-background-color: #1A2471;" text="Choose" textFill="WHITE" />
+                                    <TextField layoutX="33.0" layoutY="259.0" prefHeight="31.0" prefWidth="285.0" />
+                                    <ImageView fx:id="icon" fitHeight="48.0" fitWidth="54.0" layoutX="159.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../images/icon.png" />
+                                        </image>
+                                    </ImageView>
+                                    <Text fill="#f5f5f5" layoutX="38.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose an Icon">
+                                        <font>
+                                            <Font size="15.0" />
+                                        </font>
+                                    </Text>
+                                    <Text fill="RED" layoutX="152.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" wrappingWidth="10.841796875">
+                                        <font>
+                                            <Font size="26.0" />
+                                        </font>
+                                    </Text>
+                                    <Button fx:id="saveButton" layoutX="43.0" layoutY="436.0" mnemonicParsing="false" onAction="#onSave" prefHeight="45.0" prefWidth="266.0" style="-fx-background-color: #1A2471; -fx-background-radius: 50;" text="Save" textAlignment="CENTER" textFill="WHITE">
+                                        <font>
+                                            <Font size="21.0" />
+                                        </font>
+                                    </Button>
+                                </children>
+                                <rotationAxis>
+                                    <Point3D z="5.0" />
+                                </rotationAxis>
+                            </AnchorPane>
+                            <ImageView fx:id="icon1" fitHeight="136.0" fitWidth="160.0" layoutX="288.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../images/icon.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                    </AnchorPane>
+                </children>
+            </VBox>
+        </Scene>
+    </scene>
+</Stage>

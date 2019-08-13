@@ -1,8 +1,15 @@
 .jfx-button{
--fx-background-color : #A6ACAF;
--fx-background-radius: 100%;
-}
-.button{
--fx-background-color : #A6ACAF;
-/*-fx-font-size: 15px*/
-}
+ -fx-background-color : #A6ACAF;
+
+ }
+ .button{
+    -fx-background-color: linear-gradient(to right, #8e2de2, #4a00e0);
+    -fx-text-fill:white;
+    -fx-font-size:17px;
+    -fx-background-radius: 30px;
+    -fx-effect: dropshadow(three-pass-box, black, 20, 0, 0, 0 );
+  }
+ .textClass{
+  -fx-font-size: 14pt;
+  -fx-padding:20px 0px;
+ }

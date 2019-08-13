@@ -1,8 +1,10 @@
-.jfx-button{
--fx-background-radius :100%;
--fx-margin: 10px;
+.button{
+  -fx-background-color: linear-gradient(to right, #8e2de2, #4a00e0);
+  -fx-text-fill:white;
+  -fx-font-size:16px;
+  -fx-background-radius: 100%;
+  -fx-effect: dropshadow(three-pass-box, black, 5, 0, 0, 0 );
 }
-.jfx-button{
-    -fx-padding: 4px;
-    -fx-border-insets: 5px;
+#addButton , #subButton{
+-fx-pref-width: 35px;
 }
