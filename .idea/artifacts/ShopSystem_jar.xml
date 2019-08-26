@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/ShopSystem_jar</output-path>
     <root id="archive" name="ShopSystem.jar">
       <element id="module-output" name="ShopSystem" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../jfoenix-8.0.8.jar" path-in-jar="/" />
+      <element id="library" level="project" name="jfoenix-8.0.8" />
     </root>
   </artifact>
 </component>
