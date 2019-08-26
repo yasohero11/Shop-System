@@ -4,38 +4,33 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.stage.Stage?>
 
-<?import javafx.scene.image.Image?>
 <Stage fx:id="stage" title="History" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.HistoryController">
     <icons>
         <Image url="@../images/history.png" />
     </icons>
     <scene>
         <Scene>
-         <Pane>
-            <children>
-                    <BorderPane prefHeight="690.0" prefWidth="1136.0">
-                        <center>
-                            <ScrollPane hbarPolicy="NEVER" prefHeight="803.0" prefWidth="833.0" BorderPane.alignment="CENTER">
-                                <content>
-                                    <FlowPane fx:id="historyLayout" hgap="50" prefHeight="687.0" prefWidth="821.0" stylesheets="@../Styles/table.css ,@../Styles/history-button-style.css" vgap="20" />
-                                </content>
-                            </ScrollPane>
-                        </center>
-                        <left>
-                            <TreeTableView fx:id="historyTree" prefHeight="802.0" prefWidth="300.0" BorderPane.alignment="CENTER">
-                                <columns>
-                                    <TreeTableColumn fx:id="ordersColumn" prefWidth="316.0" text="Orders" />
-                                </columns>
-                            </TreeTableView>
-                        </left>
-                    </BorderPane>
-            </children>
-         </Pane>
+              <BorderPane prefHeight="690.0" prefWidth="1136.0">
+                  <center>
+                      <ScrollPane hbarPolicy="NEVER" prefHeight="803.0" prefWidth="833.0" BorderPane.alignment="CENTER">
+                          <content>
+                              <FlowPane fx:id="historyLayout" hgap="50" prefHeight="687.0" prefWidth="840.0" stylesheets="@../Styles/table.css ,@../Styles/history-button-style.css" vgap="20" />
+                          </content>
+                      </ScrollPane>
+                  </center>
+                  <left>
+                      <TreeTableView fx:id="historyTree" prefHeight="802.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+                          <columns>
+                              <TreeTableColumn fx:id="ordersColumn" prefWidth="316.0" text="Orders" />
+                          </columns>
+                      </TreeTableView>
+                  </left>
+              </BorderPane>
         </Scene>
     </scene>
 </Stage>

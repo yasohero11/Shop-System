@@ -202,9 +202,7 @@ public class Controller implements Initializable  {
         try {
 
             FXMLLoader.load(getClass().getResource("../View/historyPane.fxml"));
-            HistoryController.historyStage.initModality(Modality.APPLICATION_MODAL);
             editStage = FXMLLoader.load(getClass().getResource("../View/FXMLedit.fxml"));
-            editStage.initModality(Modality.APPLICATION_MODAL);
             deletePane = FXMLLoader.load(getClass().getResource("../View/FXMLdelete.fxml"));
         }
         catch(IOException e){

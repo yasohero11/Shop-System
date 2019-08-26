@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.InputEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.*;
 
@@ -71,9 +72,7 @@ public class EditController implements Initializable {
     }
     public void onClose(ActionEvent event){ stage.close(); }
 
-    public void onChange(InputEvent event){
 
-    }
     public static void show(){
         tempStage.show();
     }
@@ -82,6 +81,8 @@ public class EditController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         tempStage =  stage;
         view = listView;
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
         listView.getSelectionModel().selectedItemProperty().addListener(e->{
             name.setDisable(false);
             price.setDisable(false);
@@ -96,14 +97,7 @@ public class EditController implements Initializable {
         });
 
 
-        EventHandler event = e->{
 
-
-
-
-
-
-        };
 
         name.textProperty().addListener(e->{
             if (!product.getProductName().equalsIgnoreCase(name.getText()))

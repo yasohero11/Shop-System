@@ -17,6 +17,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import sample.Main;
@@ -43,7 +44,6 @@ public class HistoryController implements Initializable {
     public static FlowPane historyPane;
     public  static TreeTableColumn<String,String> column;
     static int indexOfItem = 0;
-    static int  x = 0;
 
     public static void addMonth_Year(String date , String time , String month_year ){
         boolean exists = false;
@@ -176,6 +176,8 @@ public class HistoryController implements Initializable {
         historyPane=historyLayout;
         historyList = historyTree;
         column = ordersColumn;
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
         historyPane.setPadding(new Insets(10));
         dates = FXCollections.observableArrayList();
         historyList.setRoot(new TreeItem<>("Dates"));
